@@ -1,17 +1,37 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ThyTooltip</title>
-    <script type="module" src="/src/thy-tooltip.ts"></script>
-  </head>
-  <body>
-    
-    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-    <div style="position: absolute; left: 50%">
-      <thy-tooltip text="Ich bin der tollte tooltip text!">Hover me an see what happens</thy-tooltip>
-    </div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ThyTooltip</title>
+  <script type="module" src="/src/thy-tooltip.ts"></script>
+ <style>
+  body {
+    --tt-color: white;
+    --tt-bg-color: rgba(0, 0, 0, 0.75);
+    --tt-shadow: none;
+    --tt-border: none;
+    --tt-font-size: 24px;
+    --tt-border-radius: none;
+    --tt-padding: 4px 2px 2px 2px;
+    --tt-font-family: courier;
+    thy-tooltip {
+      white-space: nowrap;
+    }
+  }
+ </style>
+</head>
+
+<body>
+  <div style="height: 75vh; display:flex; flex-direction: column; align-items: center; justify-content: space-around; font-family:'Courier New', Courier, monospace">
+      <thy-tooltip position="top" text="Ich bin der tollte tooltip text!">TOP</thy-tooltip>
+      <thy-tooltip position="bottom" text="Ich bin der tollte tooltip text!">BOTTOM</thy-tooltip>
+      <thy-tooltip position="left" text="Ich bin der tollte tooltip text!">LEFT</thy-tooltip>
+      <thy-tooltip position="right" text="Ich bin der tollte tooltip text!">RIGHT</thy-tooltip>
+    </p>
+  </div>
+</body>
+
 </html>
