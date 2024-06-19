@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit'
+import { LitElement, css, html, nothing } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
 
 const TT_COLOR = css`#333`;
@@ -13,6 +13,13 @@ const TT_PADDING = css`7px 5px 5px 5px`;
 const TT_TRANSITION_DURATION_ON = css`0.5s`;
 const TT_TRANSITION_DURATION_OFF = css`0.25s`;
 
+export enum TooltipPositionEnum {
+  TOP = "top",
+  BOTTOM = "bottom",
+  LEFT = "left",
+  RIGHT = "right"
+}
+
 @customElement('thy-tooltip')
 export class ThyTooltip extends LitElement {
 
@@ -23,7 +30,7 @@ export class ThyTooltip extends LitElement {
   text = ""
 
   @property({ type: String, reflect: true })
-  position = "top";
+  position = TooltipPositionEnum.TOP;
 
   @property({ type: Number, reflect: true })
   offset = 0;
@@ -31,6 +38,11 @@ export class ThyTooltip extends LitElement {
   @property({ type: Number, reflect: true })
   arrowsize = 5;
 
+  @property({ type: String, reflect: true })
+  showon = "enter";
+
+  @property({ type: String, reflect: true })
+  hideon = "leave";
 
 
   @state()
@@ -41,7 +53,20 @@ export class ThyTooltip extends LitElement {
 
   render() {
     return html`
-      <div class="tooltip" @mouseover=${this._toggleTooltip} @mouseout=${this._toggleTooltip}>
+      <div class="tooltip" 
+        @click=${(this.showon === "click" && this.hideon === "click")
+        ? this._toggleTooltip
+        : this.showon === "click"
+          ? this._showTooltip
+          : this.hideon === "click"
+            ? this._hideTooltip
+            : nothing} 
+        @mouseover=${this.showon === "enter"
+        ? this._showTooltip
+        : nothing} 
+        @mouseout=${this.hideon === "leave"
+        ? this._hideTooltip
+        : nothing}>
         <slot id="slot"></slot>
         <div class="tooltiptext ${this.position}">${this.text}</div>
       </div>
@@ -55,23 +80,31 @@ export class ThyTooltip extends LitElement {
     this.slotWidth = tt?.clientWidth;
     this.slotHeight = tt?.clientHeight;
 
-    if (this.position === "bottom") {
+    if (this.position === TooltipPositionEnum.BOTTOM) {
       tt_text!.style.transform = `translate(-50%, calc(0% + ${this.slotHeight + this.arrowsize + this.offset}px))`;
     }
-    if (this.position === "top") {
+    if (this.position === TooltipPositionEnum.TOP) {
       tt_text!.style.transform = `translate(-50%, calc(-100% - ${this.arrowsize}px - ${this.offset}px))`;
     }
-    if (this.position === "left") {
+    if (this.position === TooltipPositionEnum.LEFT) {
       tt_text!.style.transform = `translate(calc(-100% - ${this.arrowsize + this.offset}px), calc(-50% + ${this.slotHeight / 2}px))`;
     }
-    if (this.position === "right") {
+    if (this.position === TooltipPositionEnum.RIGHT) {
       tt_text!.style.transform = `translate(calc(0% + ${this.arrowsize + this.offset}px), calc(-50% + ${this.slotHeight / 2}px))`;
     }
-    tt_text!.style.setProperty('--arrowBorderWidth',`${this.arrowsize}px`);
+    tt_text!.style.setProperty('--arrowBorderWidth', `${this.arrowsize}px`);
   }
 
   private _toggleTooltip() {
-      this.opened = !this.opened;
+    this.opened = !this.opened;
+  }
+
+  private _showTooltip() {
+    this.opened = true;
+  }
+
+  private _hideTooltip() {
+    this.opened = false;
   }
 
   static styles = css`

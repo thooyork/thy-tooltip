@@ -7,29 +7,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ThyTooltip</title>
   <script type="module" src="/src/thy-tooltip.ts"></script>
- <style>
-  body {
-    --tt-color: white;
-    --tt-bg-color: rgba(0, 0, 0, 0.75);
-    --tt-shadow: none;
-    --tt-border: none;
-    --tt-font-size: 20px;
-    --tt-border-radius: none;
-    --tt-padding: 4px 2px 2px 2px;
-    --tt-font-family: courier;
-    thy-tooltip {
-      white-space: nowrap;
+  <style>
+    body {
+      --tt-color: white;
+      --tt-bg-color: rgba(0, 0, 0, 0.75);
+      --tt-shadow: none;
+      --tt-border: none;
+      --tt-font-size: 14px;
+      --tt-border-radius: none;
+      --tt-padding: 4px 2px 2px 2px;
+      --tt-font-family: courier;
+
+      thy-tooltip {
+        white-space: nowrap;
+      }
+
+      p {
+        thy-tooltip {
+          color:red;
+          --tt-width: 200px;
+          white-space: wrap;
+        }
+      }
     }
-  }
- </style>
+  </style>
 </head>
 
-<body>
-  <div style="height: 75vh; display:flex; flex-direction: column; align-items: center; justify-content: space-around; font-family:'Courier New', Courier, monospace">
-      <thy-tooltip position="top" text="Ich bin der tollte tooltip text!">TOP</thy-tooltip>
-      <thy-tooltip position="bottom" text="Ich bin der tollte tooltip text!">BOTTOM</thy-tooltip>
-      <thy-tooltip position="left" text="Ich bin der tollte tooltip text!">LEFT</thy-tooltip>
-      <thy-tooltip position="right" text="Ich bin der tollte tooltip text!">RIGHT</thy-tooltip>
+<body style="padding:25px 10%">
+  <div
+    style="height: 75vh; display:flex; flex-direction: column; align-items: center; justify-content: space-around; font-family:'Courier New', Courier, monospace">
+
+    <div>
+      <p>
+        Hallo. Ich bin ein kleiner Blindtext. Und zwar schon so lange ich denken kann. Es war nicht leicht zu verstehen,
+        was es bedeutet, ein blinder Text zu sein: Man ergibt keinen Sinn. Wirklich keinen Sinn. Man wird
+        zusammenhangslos eingeschoben und rumgedreht – und <thy-tooltip text="✨I am revealed on hover✨">hover me</thy-tooltip> gar nicht erst gelesen. Aber bin ich allein deshalb
+        ein schlechterer Text als andere? Na gut, ich werde nie in den Bestsellerlisten stehen. Aber andere Texte
+        schaffen das auch <thy-tooltip showon="click" text="✨ You have to click me to reveal this text ✨">click me</thy-tooltip>. Und darum stört es mich nicht besonders blind zu sein. Und sollten Sie diese Zeilen
+        noch immer lesen, so habe ich als kleiner Blindtext etwas geschafft, wovon all die richtigen und wichtigen Texte
+        meist nur träumen.
+      </p>
+    </div>
+
+    <thy-tooltip position="top" text="Ich bin der tollte tooltip text!">TOP</thy-tooltip>
+    <thy-tooltip position="bottom" text="Ich bin der tollte tooltip text!">BOTTOM</thy-tooltip>
+    <thy-tooltip position="left" text="Ich bin der tollte tooltip text!">LEFT</thy-tooltip>
+    <thy-tooltip position="right" text="Ich bin der tollte tooltip text!">RIGHT</thy-tooltip>
     </p>
   </div>
 </body>
