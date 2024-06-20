@@ -9,53 +9,104 @@
   <script type="module" src="/src/thy-tooltip.ts"></script>
   <style>
     body {
+
+      padding: 25px 25%;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+
+      /* Inherited Custom Tooltip CSS */
       --tt-color: white;
-      --tt-bg-color: rgba(0, 0, 0, 0.75);
+      --tt-bg-color: rgba(0, 0, 0, 0.85);
       --tt-shadow: none;
       --tt-border: none;
-      --tt-font-size: 14px;
+      --tt-font-size: 18px;
+      --tt-font-weight: 200;
       --tt-border-radius: none;
-      --tt-padding: 4px 2px 2px 2px;
+      --tt-padding: 5px;
       --tt-font-family: courier;
 
       thy-tooltip {
         white-space: nowrap;
       }
 
+      thy-tooltip.w-200 {
+        --tt-width: 200px;
+        white-space: wrap;
+      }
+
       p {
         thy-tooltip {
-          color:red;
-          --tt-width: 200px;
-          white-space: wrap;
           font-weight: bold;
+          color: red;
         }
       }
-    }
   </style>
 </head>
 
-<body style="padding:25px 22%">
-  <div
-    style="height: 75vh; display:flex; flex-direction: column; align-items: center; justify-content: space-around; font-family:'Courier New', Courier, monospace">
-
-    <div>
-      <p>
-        Hallo. Ich bin ein kleiner Blindtext. Und zwar schon so lange ich denken kann. Es war nicht leicht zu verstehen,
-        was es bedeutet, ein blinder Text zu sein: Man ergibt keinen Sinn. Wirklich keinen Sinn. Man wird
-        zusammenhangslos eingeschoben und rumgedreht – und <thy-tooltip text="✨I am revealed on hover✨">HOVER ME</thy-tooltip> gar nicht erst gelesen. Aber bin ich allein deshalb
-        ein schlechterer Text als andere? Na gut, ich werde nie in den Bestsellerlisten stehen. Aber andere Texte
-        schaffen das auch <thy-tooltip showon="click" text="✨ You have to click me to reveal this text ✨">CLICK ME</thy-tooltip>. Und darum stört es mich nicht besonders blind zu sein. Und sollten Sie diese Zeilen
-        noch immer lesen, so habe ich als kleiner Blindtext etwas geschafft, wovon all die richtigen und wichtigen Texte
-        meist nur träumen.
-      </p>
-    </div>
-
-    <thy-tooltip position="top" text="Ich bin der tollte tooltip text!">TOP</thy-tooltip>
-    <thy-tooltip position="bottom" text="Ich bin der tollte tooltip text!">BOTTOM</thy-tooltip>
-    <thy-tooltip position="left" text="Ich bin der tollte tooltip text!">LEFT</thy-tooltip>
-    <thy-tooltip position="right" text="Ich bin der tollte tooltip text!">RIGHT</thy-tooltip>
+<body>
+  <div class="container">
+    <p>
+      Now, we're going to fluff this cloud. See how easy it is to create a little tree right in your world. Now we can
+      begin working on lots of happy <thy-tooltip text="✨I am revealed on hover✨">HOVER ME</thy-tooltip>
+      little
     </p>
+    <p>
+      things. Little short strokes. Fluff that up. I like to beat the brush.
+      Be brave. This is the fun part There are no mistakes. You can fix anything that happens. Work that paint. Every
+      time you practice,<thy-tooltip animation text="Awesome animation magic !">HEY! I'M ANIMATED</thy-tooltip> you
+      learn
+      more. There isn't a rule. You just practice and find out
+      which way works best for you. Very easy to work these to death.
+    </p>
+    <p>Little trees and bushes grow however makes them
+      happy. And just raise cain. <thy-tooltip class="w-200"
+        text="My width is fixed to 200px. No matter how long the text is.">FIXED WIDTH</thy-tooltip> Let all these
+      little things happen. Don't fight them. Learn to use them. I will take
+      some magic white, and a little bit of Vandyke brown and a little touch of yellow. Everyone needs a
+      friend.
+    </p>
+    <p> Friends are the most valuable things in the world. If it's not what you want - stop and change it. Don't
+      just keep going and expect it will get better. <thy-tooltip showon="click"
+        text="✨ You have to click me to reveal this text ✨">CLICK
+        ME</thy-tooltip> We'll put a happy little bush here.
+      You got your heavy coat out yet? It's getting colder. Just make little strokes like that. It's beautiful - and
+      we haven't even done anything to it yet. There comes a nice little fluffer. You can do anything your heart can
+      imagine. That's a crooked tree. We'll send him to Washington.
+    </p>
+
+    <h4>Directions</h4> 
+    <p style="display:flex; flex-direction: row; justify-content: space-between;">
+      <thy-tooltip position="right" text="This ThyTooltip is awesome !">RIGHT</thy-tooltip>
+      <thy-tooltip position="top" text="This ThyTooltip is awesome !">TOP</thy-tooltip>
+      <thy-tooltip position="bottom" text="This ThyTooltip is awesome !">BOTTOM</thy-tooltip>
+      <thy-tooltip position="left" text="This ThyTooltip is awesome !">LEFT</thy-tooltip>
+    </p>
+
+    <h4>Events</h4> 
+    <p>
+      Show on enter / hide on leave: (default behaviour)<thy-tooltip text="This ThyTooltip is awesome !">ENTER/LEAVE</thy-tooltip>
+    </p>
+    <p>
+      Show on click / hide on click: <thy-tooltip showon="click" hideon="click" text="This ThyTooltip is awesome !">CLICK/CLICK</thy-tooltip>
+    </p>
+    <p>
+      Show on click / hide on leave:<thy-tooltip showon="click" hideon="leave" text="This ThyTooltip is awesome !">CLICK/LEAVE</thy-tooltip>
+    </p>
+    <!-- <p>
+      Show on enter / hide on click: (pointless but possible)<thy-tooltip hideon="click" text="This ThyTooltip is awesome !">ENTER/CLICK</thy-tooltip>
+    </p> -->
+    <h4>Animations</h4> 
+    <p style="display:flex; flex-direction: row; justify-content: space-between;">
+      <thy-tooltip animation text="This ThyTooltip is awesome !">FAST</thy-tooltip>
+      <thy-tooltip animation animationspeed="75" text="This ThyTooltip is awesome !">MEDIUM</thy-tooltip>
+      <thy-tooltip animation animationspeed="130" text="This ThyTooltip is awesome !">SLOW</thy-tooltip>
+    </p>
+    <p>
+      only one animation cycles: <thy-tooltip animation animationloops="1" text="This ThyTooltip is awesome !">HOVER ME, WAIT FOR ANIMATION END AND HOVER ME AGAIN</thy-tooltip>
+    </p>
+
   </div>
+
 </body>
 
 </html>

@@ -8,6 +8,7 @@ const TT_BORDER_RADIUS = css`3px`;
 const TT_SHADOW = css`2px 2px 5px rgba(0,0,0,0.3)`;
 const TT_FONT_FAMILY = css`sans-serif`;
 const TT_FONT_SIZE = css`12px`;
+const TT_FONT_WEIGHT = css`normal`;
 const TT_WIDTH = css`auto`;
 const TT_PADDING = css`7px 5px 5px 5px`;
 const TT_TRANSITION_DURATION_ON = css`0.5s`;
@@ -24,7 +25,7 @@ export enum TooltipPositionEnum {
 export class ThyTooltip extends LitElement {
 
   @property({ type: Boolean, reflect: true })
-  opened = false
+  private opened = false;
 
   @property({ type: String, reflect: true })
   text = ""
@@ -44,12 +45,32 @@ export class ThyTooltip extends LitElement {
   @property({ type: String, reflect: true })
   hideon = "leave";
 
+  @property({ type: Boolean, reflect: true })
+  animation = false;
+
+  @property({ type: Number, reflect: true })
+  animationloops = Infinity;
+
+  @property({ type: Number, reflect: true })
+  animationspeed = 35;
+
 
   @state()
-  public slotWidth: Number = 0;
+  public slotWidth: number = 0;
 
   @state()
   public slotHeight: number = 0;
+
+  @state()
+  private animationInterval: number = 0;
+
+  @state()
+  private animatedText: string = "";
+
+  @state()
+  private animationCount: number = 0;
+
+
 
   render() {
     return html`
@@ -68,7 +89,7 @@ export class ThyTooltip extends LitElement {
         ? this._hideTooltip
         : nothing}>
         <slot id="slot"></slot>
-        <div class="tooltiptext ${this.position}">${this.text}</div>
+        <div id="tooltiptext" class="tooltiptext ${this.position}">${this.animatedText}</div>
       </div>
     `
   }
@@ -76,6 +97,8 @@ export class ThyTooltip extends LitElement {
   firstUpdated() {
     const tt = this.shadowRoot?.querySelector(".tooltip") as HTMLDivElement
     const tt_text = this.shadowRoot?.querySelector(".tooltiptext") as HTMLDivElement;
+
+    this.animatedText = this.animation ? "" : this.text;
 
     this.slotWidth = tt?.clientWidth;
     this.slotHeight = tt?.clientHeight;
@@ -101,11 +124,38 @@ export class ThyTooltip extends LitElement {
 
   private _showTooltip() {
     this.opened = true;
+    if (this.animation) {
+      this.startCursorAnimation(this.text);
+    }
   }
 
   private _hideTooltip() {
     this.opened = false;
+    if (this.animation) {
+      this.stopCursorAnimation();
+    }
   }
+
+  private startCursorAnimation(str: string) {
+    if (this.animationCount < this.animationloops) {
+      this.animatedText = "";
+      let n = 0;
+      this.animationInterval = setInterval(() => {
+        n = n + 1;
+        this.animatedText = str.slice(0, n);
+        if (n === str.length) {
+          clearInterval(this.animationInterval);
+          this.animationCount += 1;
+          n = 0;
+        };
+      }, this.animationspeed);
+    }
+  }
+
+  private stopCursorAnimation() {
+    clearInterval(this.animationInterval);
+  }
+
 
   static styles = css`
     .tooltip {
@@ -115,6 +165,7 @@ export class ThyTooltip extends LitElement {
     }
 
     .tooltip .tooltiptext {
+      pointer-events: none;
       position: absolute;
       z-index: 999;
       top: 0;
@@ -128,6 +179,7 @@ export class ThyTooltip extends LitElement {
       box-shadow: var(--tt-shadow, ${TT_SHADOW});
       border: var(--tt-border, ${TT_BORDER});
       font-size: var(--tt-font-size, ${TT_FONT_SIZE});
+      font-weight: var(--tt-font-weight, ${TT_FONT_WEIGHT});
       border-radius: var(--tt-border-radius, ${TT_BORDER_RADIUS});
       padding: var(--tt-padding, ${TT_PADDING});
       font-family: var(--tt-font-family, ${TT_FONT_FAMILY});
