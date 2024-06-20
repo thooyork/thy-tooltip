@@ -10,28 +10,39 @@
   <style>
     body {
 
-      padding: 25px 25%;
+      padding: 7vh 25%;
       font-family: 'Courier New', Courier, monospace;
       font-size: 18px;
 
       /* Inherited Custom Tooltip CSS */
       --tt-color: white;
-      --tt-bg-color: rgba(0, 0, 0, 0.85);
+      --tt-bg-color: rgba(32, 32, 32, 0.85);
+      --tt-border-color: rgba(32, 32, 32, 0.85);
       --tt-shadow: none;
-      --tt-border: none;
+      --tt-border-width: 0px;
       --tt-font-size: 18px;
       --tt-font-weight: 200;
       --tt-border-radius: none;
       --tt-padding: 5px;
       --tt-font-family: courier;
 
-      thy-tooltip {
-        white-space: nowrap;
-      }
-
+      /* fixed width needs to wrap text */
       thy-tooltip.w-200 {
         --tt-width: 200px;
-        white-space: wrap;
+        --tt-wrap: wrap;
+      }
+
+      thy-tooltip.custom {
+        --tt-color: rgb(183, 0, 255);
+        --tt-bg-color: pink;
+        --tt-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        --tt-border-width: 1px;
+        --tt-border-style: dashed;
+        --tt-border-color: rgb(23, 192, 214);
+        --tt-font-size: 18px;
+        --tt-border-radius: 5px;
+        --tt-padding: 10px;
+        --tt-font-family: 'Courier New', Courier, monospace;
       }
 
       p {
@@ -47,62 +58,47 @@
   <div class="container">
     <p>
       Now, we're going to fluff this cloud. See how easy it is to create a little tree right in your world. Now we can
-      begin working on lots of happy <thy-tooltip text="✨I am revealed on hover✨">HOVER ME</thy-tooltip>
-      little
-    </p>
-    <p>
-      things. Little short strokes. Fluff that up. I like to beat the brush.
+      begin working on lots of happy <thy-tooltip text="✨I am revealed on hover✨">hover me</thy-tooltip>
+      little things.<thy-tooltip class="custom" text="✨ Custom CSS, that's amazing ✨">custom css</thy-tooltip> Little short strokes. Fluff that up. I like to beat the brush.
       Be brave. This is the fun part There are no mistakes. You can fix anything that happens. Work that paint. Every
-      time you practice,<thy-tooltip animation text="Awesome animation magic !">HEY! I'M ANIMATED</thy-tooltip> you
-      learn
-      more. There isn't a rule. You just practice and find out
-      which way works best for you. Very easy to work these to death.
-    </p>
-    <p>Little trees and bushes grow however makes them
-      happy. And just raise cain. <thy-tooltip class="w-200"
-        text="My width is fixed to 200px. No matter how long the text is.">FIXED WIDTH</thy-tooltip> Let all these
-      little things happen. Don't fight them. Learn to use them. I will take
-      some magic white, and a little bit of Vandyke brown and a little touch of yellow. Everyone needs a
-      friend.
-    </p>
-    <p> Friends are the most valuable things in the world. If it's not what you want - stop and change it. Don't
-      just keep going and expect it will get better. <thy-tooltip showon="click"
-        text="✨ You have to click me to reveal this text ✨">CLICK
-        ME</thy-tooltip> We'll put a happy little bush here.
-      You got your heavy coat out yet? It's getting colder. Just make little strokes like that. It's beautiful - and
-      we haven't even done anything to it yet. There comes a nice little fluffer. You can do anything your heart can
-      imagine. That's a crooked tree. We'll send him to Washington.
+      time you practice,<thy-tooltip animation text="Awesome animation magic !">Hey! I'm animated</thy-tooltip> you
+      learn more. There isn't a rule. <thy-tooltip class="w-200"
+        text="My width is fixed to 200px. No matter how long the text is.">fixed width</thy-tooltip> You just practice
+      and find out which way works best for you. Very easy to work these to death. Little trees and bushes grow however
+      makes them <thy-tooltip showon="click" text="✨ You have to click me to reveal this text ✨">click me</thy-tooltip>
+      happy.
     </p>
 
-    <h4>Directions</h4> 
+    <h4>DIRECTIONS</h4>
     <p style="display:flex; flex-direction: row; justify-content: space-between;">
-      <thy-tooltip position="right" text="This ThyTooltip is awesome !">RIGHT</thy-tooltip>
-      <thy-tooltip position="top" text="This ThyTooltip is awesome !">TOP</thy-tooltip>
-      <thy-tooltip position="bottom" text="This ThyTooltip is awesome !">BOTTOM</thy-tooltip>
-      <thy-tooltip position="left" text="This ThyTooltip is awesome !">LEFT</thy-tooltip>
+      <thy-tooltip position="right" text="This ThyTooltip is awesome !">Right</thy-tooltip>
+      <thy-tooltip position="top" text="This ThyTooltip is awesome !">Top</thy-tooltip>
+      <thy-tooltip position="bottom" text="This ThyTooltip is awesome !">Bottom</thy-tooltip>
+      <thy-tooltip position="left" text="This ThyTooltip is awesome !">Left</thy-tooltip>
     </p>
 
-    <h4>Events</h4> 
+    <h4>EVENT</h4>
     <p>
-      Show on enter / hide on leave: (default behaviour)<thy-tooltip text="This ThyTooltip is awesome !">ENTER/LEAVE</thy-tooltip>
+      Show on enter / hide on leave: (default behaviour)<thy-tooltip
+        text="This ThyTooltip is awesome !">enter/leave</thy-tooltip>
     </p>
     <p>
-      Show on click / hide on click: <thy-tooltip showon="click" hideon="click" text="This ThyTooltip is awesome !">CLICK/CLICK</thy-tooltip>
+      Show on click / hide on click: <thy-tooltip showon="click" hideon="click"
+        text="This ThyTooltip is awesome !">click/click</thy-tooltip>
     </p>
     <p>
-      Show on click / hide on leave:<thy-tooltip showon="click" hideon="leave" text="This ThyTooltip is awesome !">CLICK/LEAVE</thy-tooltip>
+      Show on click / hide on leave:<thy-tooltip showon="click" hideon="leave"
+        text="This ThyTooltip is awesome !">click/leave</thy-tooltip>
     </p>
-    <!-- <p>
-      Show on enter / hide on click: (pointless but possible)<thy-tooltip hideon="click" text="This ThyTooltip is awesome !">ENTER/CLICK</thy-tooltip>
-    </p> -->
-    <h4>Animations</h4> 
+    <h4>ANIMATIONS</h4>
     <p style="display:flex; flex-direction: row; justify-content: space-between;">
-      <thy-tooltip animation text="This ThyTooltip is awesome !">FAST</thy-tooltip>
-      <thy-tooltip animation animationspeed="75" text="This ThyTooltip is awesome !">MEDIUM</thy-tooltip>
-      <thy-tooltip animation animationspeed="130" text="This ThyTooltip is awesome !">SLOW</thy-tooltip>
+      <thy-tooltip animation text="This ThyTooltip is awesome !">fast</thy-tooltip>
+      <thy-tooltip animation animationspeed="75" text="This ThyTooltip is awesome !">medium</thy-tooltip>
+      <thy-tooltip animation animationspeed="130" text="This ThyTooltip is awesome !">slow</thy-tooltip>
     </p>
     <p>
-      only one animation cycles: <thy-tooltip animation animationloops="1" text="This ThyTooltip is awesome !">HOVER ME, WAIT FOR ANIMATION END AND HOVER ME AGAIN</thy-tooltip>
+      only one animation cycle: <thy-tooltip animation animationloops="1" text="This ThyTooltip is awesome !">hover me,
+        wait for animation to end and hover me again</thy-tooltip>
     </p>
 
   </div>

@@ -3,7 +3,9 @@ import { customElement, property, state } from 'lit/decorators.js'
 
 const TT_COLOR = css`#333`;
 const TT_BG_COLOR = css`#FFF`;
-const TT_BORDER = css`1px solid #333`;
+const TT_BORDER_WIDTH = css`1px`;
+const TT_BORDER_STYLE = css`solid`;
+const TT_BORDER_COLOR = css`#333`;
 const TT_BORDER_RADIUS = css`3px`;
 const TT_SHADOW = css`2px 2px 5px rgba(0,0,0,0.3)`;
 const TT_FONT_FAMILY = css`sans-serif`;
@@ -13,6 +15,7 @@ const TT_WIDTH = css`auto`;
 const TT_PADDING = css`7px 5px 5px 5px`;
 const TT_TRANSITION_DURATION_ON = css`0.5s`;
 const TT_TRANSITION_DURATION_OFF = css`0.25s`;
+const TT_WRAP = css`nowrap`;
 
 export enum TooltipPositionEnum {
   TOP = "top",
@@ -89,7 +92,7 @@ export class ThyTooltip extends LitElement {
         ? this._hideTooltip
         : nothing}>
         <slot id="slot"></slot>
-        <div id="tooltiptext" class="tooltiptext ${this.position}">${this.animatedText}</div>
+        <div class="tooltiptext ${this.position}">${this.animatedText}</div>
       </div>
     `
   }
@@ -165,6 +168,7 @@ export class ThyTooltip extends LitElement {
     }
 
     .tooltip .tooltiptext {
+      white-space: var(--tt-wrap, ${TT_WRAP});
       pointer-events: none;
       position: absolute;
       z-index: 999;
@@ -177,7 +181,9 @@ export class ThyTooltip extends LitElement {
       color: var(--tt-color, ${TT_COLOR});
       background-color: var(--tt-bg-color, ${TT_BG_COLOR});
       box-shadow: var(--tt-shadow, ${TT_SHADOW});
-      border: var(--tt-border, ${TT_BORDER});
+      border-width: var(--tt-border-width, ${TT_BORDER_WIDTH});
+      border-style: var(--tt-border-style, ${TT_BORDER_STYLE});
+      border-color: var(--tt-border-color, ${TT_BORDER_COLOR});
       font-size: var(--tt-font-size, ${TT_FONT_SIZE});
       font-weight: var(--tt-font-weight, ${TT_FONT_WEIGHT});
       border-radius: var(--tt-border-radius, ${TT_BORDER_RADIUS});
@@ -218,7 +224,7 @@ export class ThyTooltip extends LitElement {
       border-style: solid;
       border-width: var(--arrowBorderWidth, 3px);
       border-bottom: 0;
-      border-top-color: var(--tt-bg-color, ${TT_BG_COLOR});
+      border-top-color: var(--tt-border-color, ${TT_BORDER_COLOR});
       transform: translate(-50%, 100%);
     }
 
@@ -233,7 +239,7 @@ export class ThyTooltip extends LitElement {
       border-style: solid;
       border-width: var(--arrowBorderWidth, 3px);
       border-top: 0;
-      border-bottom-color: var(--tt-bg-color, ${TT_BG_COLOR});
+      border-bottom-color: var(--tt-border-color, ${TT_BORDER_COLOR});
       transform: translate(-50%, -100%);
     }
 
@@ -248,7 +254,7 @@ export class ThyTooltip extends LitElement {
       border-style: solid;
       border-width: var(--arrowBorderWidth, 3px);
       border-right: 0;
-      border-left-color: var(--tt-bg-color, ${TT_BG_COLOR});
+      border-left-color: var(--tt-border-color, ${TT_BORDER_COLOR});
       transform: translate(100%, -50%); 
     }
 
@@ -263,7 +269,7 @@ export class ThyTooltip extends LitElement {
       border-style: solid;
       border-width: var(--arrowBorderWidth, 3px);
       border-left: 0;
-      border-right-color: var(--tt-bg-color, ${TT_BG_COLOR});
+      border-right-color: var(--tt-border-color, ${TT_BORDER_COLOR});
       transform: translate(-100%, -50%);
     }
 
