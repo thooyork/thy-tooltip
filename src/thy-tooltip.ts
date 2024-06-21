@@ -28,7 +28,7 @@ export enum TooltipPositionEnum {
 export class ThyTooltip extends LitElement {
 
   @property({ type: Boolean, reflect: true })
-  private opened = false;
+  public opened = false;
 
   @property({ type: String, reflect: true })
   text = ""
